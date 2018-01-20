@@ -30,10 +30,6 @@ public class Entry implements java.io.Serializable {
 	@Column(name="entryId")
 	private long entryId;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Person.class)
-	@JoinColumn(name = "personId", nullable = false)
-	private Person person;
-		
 	@Column(name="entry_title")
 	private String entryTitle;
 	
@@ -43,14 +39,6 @@ public class Entry implements java.io.Serializable {
 	@Column(name="entry_date")
 	private Date entryDate;
 	
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
 	public long getEntryId() {
 		return entryId;
 	}

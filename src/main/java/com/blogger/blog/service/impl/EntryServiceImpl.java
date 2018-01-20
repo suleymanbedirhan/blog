@@ -27,7 +27,8 @@ public class EntryServiceImpl implements EntryService{
 	}
 
 	@Override
-	public void deleteEntry(Entry entry) {
+	public void deleteEntry(Long id) {
+		Entry entry = entryDAO.findEntryById(id);
 		entryDAO.deleteEntry(entry);
 	}
 

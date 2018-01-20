@@ -10,7 +10,7 @@ public interface EntryService {
 	
 	public Entry findEntryById(Long id);
 	
-	public void deleteEntry(Entry entry);
+	public void deleteEntry(Long id);
 	
 	public List<Entry> findAll();
 

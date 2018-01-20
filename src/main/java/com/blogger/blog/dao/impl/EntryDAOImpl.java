@@ -3,6 +3,7 @@ package com.blogger.blog.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -26,7 +27,12 @@ public class EntryDAOImpl implements EntryDAO {
 	@Override
 	public Entry findEntryById(Long id) {
 		String sql = "from Entry where id = " + id;
-		return (Entry) entityManager.createQuery(sql).getSingleResult();
+		Entry entry = null; 
+		try {
+			entry = (Entry) entityManager.createQuery(sql).getSingleResult();
+		}catch(NoResultException e) {}
+		
+		return entry;
 	}
 
 	@Override
