@@ -43,8 +43,13 @@ public class EntryDAOImpl implements EntryDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Entry> findAll() {
-		String sql = "select * from entry";
-		return (List<Entry>) entityManager.createQuery(sql).getResultList();
+		String sql = "from Entry";
+		List<Entry> entries = null; 
+		try {
+			entries = (List<Entry>) entityManager.createQuery(sql).getResultList();
+		}catch(NoResultException e) {}
+		
+		return entries;
 	}
 
 	/*test comment1*/
