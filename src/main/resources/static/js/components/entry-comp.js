@@ -5,11 +5,17 @@ class App extends React.Component {
       this.createEntry = this.createEntry.bind(this);
       this.state = {
           entries: [],
+          showForm: false
       };
    }
  
   componentDidMount() {
     this.loadEntries();
+  }
+  
+  onClick(e){
+	    e.preventDefault();
+	    this.setState({showForm: !this.state.showForm})
   }
   
   loadEntries() {
@@ -32,7 +38,7 @@ class App extends React.Component {
   }  
   
   createEntry(entry) {
-      fetch('http://localhost:8080/entry/list', {
+      fetch('http://localhost:8080/entry/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -47,10 +53,16 @@ class App extends React.Component {
   
   render() {
     return (
-       <div>
-          <EntryForm createEntry={this.createEntry}/>
-          <EntryList deleteEntry={this.deleteEntry} entries={this.state.entries}/> 
-       </div>
+    	<section className="vbox">
+	       <header className="card-header"> <p>Spring Boot + Hibernate + Reactjs demo project</p> </header>
+	       <section className="panel">
+		       <div className="form-control">
+					<a href="#" className="btn btn-success float-right" onClick={this.onClick.bind(this)}>Create Entry</a>
+				  {this.state.showForm && <EntryForm createEntry={this.createEntry}/> }
+		          <EntryList deleteEntry={this.deleteEntry} entries={this.state.entries}/> 
+		       </div>
+		   </section>
+	   </section>
     );
   }
 }
@@ -67,9 +79,6 @@ class EntryList extends React.Component {
 	
 	    return (
 	      <form className="panel">
-		      <div className="panel">
-	    		<button className="btn btn-success float-right">Create Entry</button>
-	    	  </div>
 	    	<br/>
 	    	<br/>
 		      <div className="panel">
@@ -77,6 +86,7 @@ class EntryList extends React.Component {
 		      		{entries}
 			    </div>
 		      </div>
+		    <br/>
 	      </form>
 	      );
   }
@@ -130,22 +140,20 @@ class EntryForm extends React.Component {
     
     render() {
         return (
-            <div className="panel panel-default">
-                <div className="panel-heading">Create Entry</div>
-                <div className="panel-body">
-                <form className="form-inline">
-                    <div className="col-md-2">
-                        <input type="text" placeholder="Entry Title" className="form-control"  name="entryTitle" onChange={this.handleChange}/>    
-                    </div>
-                    <div className="col-md-2">       
-                        <input type="text" placeholder="Entry Detail" className="form-control" name="entryDetail" onChange={this.handleChange}/>
-                    </div>
-                    <div className="col-md-2">
-                        <button className="btn btn-success" onClick={this.handleSubmit}>Save</button>   
-                    </div>        
-                </form>
-                </div>      
-            </div>
+    	     <form>
+    	     <br/>
+    	        <div className="form-group">
+    	          <label htmlFor="formGroupExampleInput">Title</label>
+    	          <input type="text" className="form-control"  name="entryTitle" onChange={this.handleChange}/> 
+    	        </div>
+    	        <div className="form-group">
+    	          <label htmlFor="formGroupExampleInput2">Detail</label>
+    	          <input type="text" className="form-control" name="entryDetail" onChange={this.handleChange}/>
+    	        </div>
+    	          <div className="col-md-2">
+                  <button className="btn btn-success" onClick={this.handleSubmit}>Save</button>   
+              </div> 
+    	      </form>
          
         );
     }
