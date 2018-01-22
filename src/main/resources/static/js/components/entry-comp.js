@@ -23,8 +23,8 @@ class App extends React.Component {
   } 
   
   deleteEntry(entry) {
-      fetch (entry._links.self.href,
-      { method: 'DELETE',})
+      fetch ('http://localhost:8080/entry/'+entry.entryId,
+      { method: 'POST',})
       .then( 
           res => this.loadEntries()
       )
@@ -49,33 +49,36 @@ class App extends React.Component {
     return (
        <div>
           <EntryForm createEntry={this.createEntry}/>
-          <EntryTable deleteEntry={this.deleteEntry} entries={this.state.entries}/> 
+          <EntryList deleteEntry={this.deleteEntry} entries={this.state.entries}/> 
        </div>
     );
   }
 }
     	
-class EntryTable extends React.Component {
+class EntryList extends React.Component {
     constructor(props) {
         super(props);
     }
     
     render() {
-    var entries = this.props.entries.map(entry =>
-        <Entry key={entry.entryTitle} entry={entry} deleteEntry={this.props.deleteEntry}/>
-    );
-
-    return (
-      <div>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Firstname</th><th>Lastname</th><th> </th>
-          </tr>
-        </thead>
-        <tbody>{entries}</tbody>
-      </table>
-      </div>);
+	    var entries = this.props.entries.map(entry =>
+	        <Entry key={entry.entryTitle} entry={entry} deleteEntry={this.props.deleteEntry}/>
+	    );
+	
+	    return (
+	      <form className="panel">
+		      <div className="panel">
+	    		<button className="btn btn-success float-right">Create Entry</button>
+	    	  </div>
+	    	<br/>
+	    	<br/>
+		      <div className="panel">
+		      	<div className="panel-body">
+		      		{entries}
+			    </div>
+		      </div>
+	      </form>
+	      );
   }
 }
         
@@ -91,13 +94,16 @@ class Entry extends React.Component {
  
     render() {
         return (
-          <tr>
-            <td>{this.props.entry.entryTitle}</td>
-            <td>{this.props.entry.entryDetail}</td>
-            <td>
-                <button className="btn btn-danger" onClick={this.deleteEntry}>Delete</button>
-            </td>
-          </tr>
+        		<div className="card">
+        		  <div className="card-header">
+        		  {this.props.entry.entryTitle} <div className="float-right"><a href="#" className="btn btn-sm btn-danger" onClick={this.deleteEntry}>Delete Entry</a></div> 
+        		  </div>
+        		  <div className="card-block">
+        		    <blockquote className="card-blockquote">
+        		      <footer>Someone famous in <cite title="Source Title">{this.props.entry.entryDetail}</cite> </footer>
+        		    </blockquote>
+        		  </div>
+        		</div>
         );
     } 
 }
@@ -111,7 +117,6 @@ class EntryForm extends React.Component {
     }
 
     handleChange(event) {
-        console.log("NAME: " + event.target.name + " VALUE: " + event.target.value)
         this.setState(
             {[event.target.name]: event.target.value}
         );
