@@ -52,7 +52,6 @@ public class EntryDAOImpl implements EntryDAO {
 		return entries;
 	}
 
-	/*test comment1*/
 	@Override
 	public void updateEntry(Entry entry) {
 		Entry e = findEntryById(entry.getEntryId());

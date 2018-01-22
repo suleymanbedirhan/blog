@@ -148,10 +148,10 @@ class EntryForm extends React.Component {
     	        </div>
     	        <div className="form-group">
     	          <label htmlFor="formGroupExampleInput2">Detail</label>
-    	          <input type="text" className="form-control" name="entryDetail" onChange={this.handleChange}/>
+    	          <textarea className="form-control" name="entryDetail" onChange={this.handleChange}/>
     	        </div>
     	          <div className="col-md-2">
-                  <button className="btn btn-success" onClick={this.handleSubmit}>Save</button>   
+                  <a href="#" className="btn btn-success" onClick={this.handleSubmit}>Save</a>   
               </div> 
     	      </form>
          
