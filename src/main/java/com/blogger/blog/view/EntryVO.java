@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class EntryVO {
 	
+	private Long entryId;
 	
 	private String entryTitle;
 	
@@ -38,6 +39,14 @@ public class EntryVO {
 
 	public void setEntryDate(Date entryDate) {
 		this.entryDate = entryDate;
+	}
+
+	public Long getEntryId() {
+		return entryId;
+	}
+
+	public void setEntryId(Long entryId) {
+		this.entryId = entryId;
 	}
 
 }

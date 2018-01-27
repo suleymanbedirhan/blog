@@ -58,7 +58,7 @@ public class EntryDAOImpl implements EntryDAO {
 		e.setEntryDate(entry.getEntryDate());
 		e.setEntryDetail(entry.getEntryDetail());
 		e.setEntryTitle(entry.getEntryTitle());
-		entityManager.flush();
+		entityManager.merge(e);
 	}
 
 }
