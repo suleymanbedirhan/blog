@@ -46,7 +46,7 @@ class App extends React.Component {
       .then( 
           res => this.loadEntries()
       )
-      .catch( err => cosole.error(err))                
+      .catch( err => console.error(err))                
   }  
   
   createEntry(entry) {
@@ -68,7 +68,7 @@ class App extends React.Component {
       ).then(
     	  this.setState({showForm: !this.state.showForm}) 	  
       )
-      .catch( err => cosole.error(err))
+      .catch( err => console.error(err))
   }
   
   setEntry(entry) {
