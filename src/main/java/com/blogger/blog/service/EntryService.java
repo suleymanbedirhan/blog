@@ -3,10 +3,11 @@ package com.blogger.blog.service;
 import java.util.List;
 
 import com.blogger.blog.model.Entry;
+import com.blogger.blog.view.EntryVO;
 
 public interface EntryService {
 
-	public void addEntry(Entry entry);
+	public Entry addEntry(EntryVO entryVo);
 	
 	public Entry findEntryById(Long id);
 	
@@ -14,5 +15,5 @@ public interface EntryService {
 	
 	public List<Entry> findAll();
 
-	public void updateEntry(Entry entry);
+	public void updateEntry(EntryVO entryVo);
 }

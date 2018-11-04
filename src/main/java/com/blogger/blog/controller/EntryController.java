@@ -1,7 +1,6 @@
-package com.blogger.blog.webservices;
+package com.blogger.blog.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +31,8 @@ public class EntryController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public ResponseEntity<Entry> addEntry(@RequestBody EntryVO vo) {
-		Entry entry = new Entry();
-		entry.setEntryTitle(vo.getEntryTitle());
-		entry.setEntryDetail(vo.getEntryDetail());
-		entry.setEntryDate(new Date());
-		if(vo.getEntryId() == null) {
-			entryService.addEntry(entry);
-		}else {
-			entry.setEntryId(vo.getEntryId());
-			entryService.updateEntry(entry);
-		}
-
+	public ResponseEntity<Entry> saveEntry(@RequestBody EntryVO vo) {
+		Entry entry = entryService.addEntry(vo);
 		
 		return new ResponseEntity<Entry>(entry, HttpStatus.OK);
 	}
@@ -65,15 +54,10 @@ public class EntryController {
 	
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public ResponseEntity<Entry> updateEntry(@RequestBody Entry entry) {
-		Entry entry2 = entryService.findEntryById(entry.getEntryId());
-		if(entry2 == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		entry2.setEntryTitle(entry.getEntryTitle());
-		entry2.setEntryDetail(entry.getEntryDetail());
-		entry2.setEntryDate(entry.getEntryDate());
-		entryService.updateEntry(entry2);
+	public ResponseEntity<Entry> updateEntry(@RequestBody EntryVO entryVo) {
+		
+		entryService.updateEntry(entryVo);
+		
 		return new ResponseEntity<Entry>(HttpStatus.OK);
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 
- * @author silemanbed
+ * @author suleyman.bedirhanoglu
  *
  */
 public class EntryVO {

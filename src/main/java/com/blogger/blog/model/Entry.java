@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,18 +26,21 @@ public class Entry implements java.io.Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id")
     @SequenceGenerator(name = "id", sequenceName = "id")
-	@Column(name="entryId")
+	@Column
 	private long entryId;
 	
-	@Column(name="entry_title")
+	@Column
 	private String entryTitle;
 	
 	@Lob
-	@Column(name="entry_detail")
+	@Column
 	private String entryDetail;
 	
-	@Column(name="entry_date")
+	@Column
 	private Date entryDate;
+	
+	@Version
+	private Integer version;
 	
 	public long getEntryId() {
 		return entryId;
@@ -68,6 +72,14 @@ public class Entry implements java.io.Serializable {
 
 	public void setEntryDate(Date entryDate) {
 		this.entryDate = entryDate;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }
 

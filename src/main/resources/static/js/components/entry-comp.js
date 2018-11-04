@@ -45,6 +45,13 @@ class App extends React.Component {
       { method: 'POST',})
       .then( 
           res => this.loadEntries()
+      ).then(
+		  this.state = {
+	          entries: [],
+	          showForm: false,
+	          entryTitle: '',
+	          entryDetail: ''
+		      }	  
       )
       .catch( err => console.error(err))                
   }  
