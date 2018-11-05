@@ -42,7 +42,7 @@ class App extends React.Component {
   
   deleteEntry(entry) {
       fetch ('http://localhost:8080/entry/'+entry.entryId,
-      { method: 'POST',})
+      { method: 'DELETE',})
       .then( 
           res => this.loadEntries()
       ).then(

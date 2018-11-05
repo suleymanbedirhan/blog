@@ -21,7 +21,6 @@ public class EntryServiceImpl implements EntryService{
 	@Autowired
 	EntryDAO entryDAO;
 	
-	
 	@Override
 	public Entry addEntry(EntryVO entryVo) {
 		Entry entry = new Entry();
